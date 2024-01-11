@@ -4,13 +4,9 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Create POP_UP_Dialogs Widget
+![pop_dialogs](https://github.com/offical-waqas-khurshid/POP-Dialogs-Widget/assets/111581093/d44e054b-983e-46cf-8644-d87cc11bf145)
 
-A few resources to get you started if this is your first Flutter project:
+Show Sucess Dialog 
+![success_dialog](https://github.com/offical-waqas-khurshid/POP-Dialogs-Widget/assets/111581093/f40fc9ef-052e-4689-880f-6105dd6f8bdf)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
