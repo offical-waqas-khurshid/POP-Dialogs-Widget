@@ -64,27 +64,51 @@ class PopDialog extends StatelessWidget {
   }
 
   /// Function for Success Pop_Up Dialog
- static successDialog(BuildContext context,
-      {String? title, String? content, String? buttonTitle, Widget? icon}) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+  static void successDialog(
+      BuildContext context, {
+        String? title,
+        Function? onTap,
+        String? content,
+        String? defaultButtonTitle,
+        Widget? icon,
+        List<Widget>? customActions,
+      }) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      List<Widget> actions = [];
+
+      /// Add the default "Done" button if no custom actions are provided
+      if (customActions == null || customActions.isEmpty) {
+        actions.add(
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              if (onTap != null) {
+                onTap();
+              }
+            },
+            child: Text(defaultButtonTitle ?? "Done"),
+          ),
+        );
+      } else {
+        // Use the provided custom actions
+        actions.addAll(customActions);
+      }
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(title ?? "Success"),
+            title: Align(alignment: Alignment.centerLeft, child: Text(title ?? "Success")),
             content: Text(content ?? "Successfully Delivered"),
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(buttonTitle ?? "Done"),
-              ),
-            ],
+            actions: actions,
+            icon: icon ?? const Icon(Icons.check, color: Colors.green),
           );
         },
       );
     });
   }
+
+
+/// Function For
 
 }
