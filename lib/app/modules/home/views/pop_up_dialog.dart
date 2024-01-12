@@ -62,4 +62,29 @@ class PopDialog extends StatelessWidget {
       actions: actions,
     );
   }
+
+  /// Function for Success Pop_Up Dialog
+ static successDialog(BuildContext context,
+      {String? title, String? content, String? buttonTitle, Widget? icon}) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title ?? "Success"),
+            content: Text(content ?? "Successfully Delivered"),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(buttonTitle ?? "Done"),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
 }
