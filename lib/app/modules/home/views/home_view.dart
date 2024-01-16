@@ -20,50 +20,71 @@ class HomeView extends GetView<HomeController> {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  PopDialog.successDialog(context,
-                      title: "Waqas",
-                      content: "Khurshid Alaam",
-                      icon: Icon(Icons.delete),
-                      //defaultButtonTitle : "Default"
-                      customActions: [
-                        ElevatedButton(onPressed: (){}, child: Text("Done")),
-                        ElevatedButton(onPressed: (){}, child: Text("Cancel")),
-                      ],
+                  PopDialog.errorDialog(
+                    context,
+                    description: "Test description",
+                    title: "Waqas",
+                    onPositiveTap: () {
+                      print("------------" + "onPositiveTap");
+                    },
                   );
                 },
                 child: const Text("Success Dialog")),
+
             ElevatedButton(
                 onPressed: () {
-                  PopDialog.successDialog(context,
-                    title: "Warning",
-                    content: "Don't touch it agaian!",
-                    icon: Icon(Icons.warning),
-                  );
-                },
-                child: const Text("Warning Dialog")),
-            ElevatedButton(
-                onPressed: () {
-                  PopDialog.successDialog(context,
-                    title: "Error",
-                    content: "Don't touch it agaian!",
-                    icon: Icon(Icons.error_outline),
+                  PopDialog.errorDialog(
+                    context,
+                    description: "Test description",
+                    title: "Waqas",
+                    onPositiveTap: () {
+                      print("------------" + "onPositiveTap");
+                    },
                   );
                 },
                 child: const Text("Error Dialog")),
+
             ElevatedButton(
                 onPressed: () {
-                  PopDialog.successDialog(context,
-                    title: "Information",
-                    content: "Don't touch it agaian!",
-                    icon: Icon(Icons.info_rounded),
+                  PopDialog.successDialog(
+                    context,
+                    description: "Test description",
+                    title: "Waqas",
+                    onPositiveTap: () {
+                      print("------------" + "onPositiveTap");
+                    },
                   );
                 },
-                child: const Text("Information Dialog")),
+                child: const Text("Success Dialog")),
+
+            ElevatedButton(
+                onPressed: () {
+                  PopDialog.informationDialog(
+                    context,
+                    description: "Test description",
+                    title: "Waqas",
+                    onPositiveTap: () {
+                      print("------------" + "onPositiveTap");
+                    },
+                  );
+                },
+                child: const Text("Infor Dialog")),
+
+            ElevatedButton(
+                onPressed: () {
+                  PopDialog.warningDialog(
+                    context,
+                    description: "Test description",
+                    title: "Waqas",
+                    onPositiveTap: () {
+                      print("------------" + "onPositiveTap");
+                    },
+                  );
+                },
+                child: const Text("Warning Dialog")),
           ],
         ),
       ),
     );
   }
-
-
 }

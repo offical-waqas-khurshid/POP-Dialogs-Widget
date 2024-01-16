@@ -1,114 +1,145 @@
 import 'package:flutter/material.dart';
 
-class PopDialog extends StatelessWidget {
-  final Widget? title;
-  final Widget? content;
-  final List<Widget>? actions;
-  final Color? backgroundColor;
-  final double? elevation;
-  final EdgeInsetsGeometry? contentPadding;
-  final AlignmentGeometry? alignment;
-  ShapeBorder? shape;
-  final Color? iconColor;
-  final Widget? icon;
-  final MainAxisAlignment? actionsAlignment;
-  EdgeInsetsGeometry? actionsPadding;
-  TextStyle? contentTextStyle;
-  EdgeInsetsGeometry? buttonPadding;
-  EdgeInsetsGeometry? iconPadding;
-  EdgeInsetsGeometry? titlePadding;
-  final TextStyle? titleTextStyle;
-
-  PopDialog(
-      {Key? key,
-      this.title,
-      this.content,
-      this.icon,
-      this.actions,
-      this.backgroundColor,
-      this.actionsAlignment,
-      this.actionsPadding,
-      this.alignment,
-      this.buttonPadding,
-      this.contentPadding,
-      this.contentTextStyle,
-      this.elevation,
-      this.iconColor,
-      this.iconPadding,
-      this.shape,
-      this.titlePadding,
-      this.titleTextStyle})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: title,
-      content: content,
-      contentPadding: contentPadding,
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      alignment: alignment,
-      shape: shape,
-      iconColor: iconColor,
-      icon: icon,
-      actionsAlignment: actionsAlignment,
-      actionsPadding: actionsPadding,
-      contentTextStyle: contentTextStyle,
-      buttonPadding: buttonPadding,
-      iconPadding: iconPadding,
-      titlePadding: titlePadding,
-      titleTextStyle: titleTextStyle,
-      actions: actions,
-    );
-  }
-
-  /// Function for Success Pop_Up Dialog
-  static void successDialog(
-      BuildContext context, {
-        String? title,
-        Function? onTap,
-        String? content,
-        String? defaultButtonTitle,
-        Widget? icon,
-        List<Widget>? customActions,
-      }) {
+class PopDialog {
+  /// Error Dialog that call alert dialog display fucntion
+  static void errorDialog(
+    BuildContext context, {
+    String title = "Error",
+    String description = "An error occurred",
+    String positiveButtonText = "Ok",
+    Function()? onPositiveTap,
+  }) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      List<Widget> actions = [];
-
-      /// Add the default "Done" button if no custom actions are provided
-      if (customActions == null || customActions.isEmpty) {
-        actions.add(
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              if (onTap != null) {
-                onTap();
-              }
-            },
-            child: Text(defaultButtonTitle ?? "Done"),
+      Icon icon = const Icon(Icons.error, color: Colors.red);
+      _displayDialog(context, title, description, icon, [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            if (onPositiveTap != null) {
+              onPositiveTap();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(positiveButtonText),
           ),
-        );
-      } else {
-        // Use the provided custom actions
-        actions.addAll(customActions);
-      }
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Align(alignment: Alignment.centerLeft, child: Text(title ?? "Success")),
-            content: Text(content ?? "Successfully Delivered"),
-            actions: actions,
-            icon: icon ?? const Icon(Icons.check, color: Colors.green),
-          );
-        },
-      );
+        ),
+      ]);
     });
   }
 
+  /// Success Dialog that call alert dialog display function
+  static void successDialog(
+      BuildContext context, {
+        String title = "Success",
+        String description = "An Success occurred",
+        String positiveButtonText = "Ok",
+        Function()? onPositiveTap,
+      }) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Icon icon = const Icon(Icons.gpp_good_outlined, color: Colors.red);
+      _displayDialog(context, title, description, icon, [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            if (onPositiveTap != null) {
+              onPositiveTap();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(positiveButtonText),
+          ),
+        ),
+      ]);
+    });
+  }
 
-/// Function For
+  /// Warning Dialog that call alert dialog display function
+  static void warningDialog(
+      BuildContext context, {
+        String title = "Warning",
+        String description = "An Warning occurred",
+        String positiveButtonText = "Ok",
+        String negativeButtonText = "Cancel",
+        Function()? onPositiveTap,
+        Function()? onNegativeTap,
+      }) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Icon icon = const Icon(Icons.warning, color: Colors.red);
+      _displayDialog(context, title, description, icon, [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            if (onPositiveTap != null) {
+              onPositiveTap();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(positiveButtonText),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            if (onNegativeTap != null) {
+              onNegativeTap();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(negativeButtonText),
+          ),
+        ),
+      ]);
+    });
+  }
 
+  /// Warning Dialog that call alert dialog display function
+  static void informationDialog(
+      BuildContext context, {
+        String title = "Information",
+        String description = "An Information occurred",
+        String positiveButtonText = "Ok",
+        Function()? onPositiveTap,
+        Function()? onNegativeTap,
+      }) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Icon icon = const Icon(Icons.info_outline_rounded, color: Colors.red);
+      _displayDialog(context, title, description, icon, [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            if (onPositiveTap != null) {
+              onPositiveTap();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(positiveButtonText),
+          ),
+        ),
+      ]);
+    });
+  }
+
+  /// View Function that Take multiple parameters
+  static void _displayDialog(BuildContext context, String title,
+      String description, Widget icon, List<Widget>? actions) {
+    showDialog(
+      barrierDismissible: false,
+      useSafeArea: true,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Align(alignment: Alignment.centerLeft, child: Text(title)),
+          content: Text(description),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: actions,
+          icon: icon,
+        );
+      },
+    );
+  }
 }
