@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PopDialog {
   static late BuildContext dialogContext;
 
-  /// Error Dialog that call alert dialog display fucntion
+  /// Error Dialog that call alert dialog display function
   static errorDialog(
       BuildContext context, {
         String title = "Error",
