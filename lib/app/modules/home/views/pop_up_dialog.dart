@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PopDialog {
+  static late BuildContext dialogContext;
+
   /// Error Dialog that call alert dialog display fucntion
-  static void errorDialog(
-    BuildContext context, {
-    String title = "Error",
-    String description = "An error occurred",
-    String positiveButtonText = "Ok",
-    Function()? onPositiveTap,
-  }) {
+  static errorDialog(
+      BuildContext context, {
+        String title = "Error",
+        String description = "An error occurred",
+        String positiveButtonText = "Ok",
+        Function()? onPositiveTap,
+      }) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Icon icon = const Icon(Icons.error, color: Colors.red);
       _displayDialog(context, title, description, icon, [
@@ -29,7 +31,7 @@ class PopDialog {
   }
 
   /// Success Dialog that call alert dialog display function
-  static void successDialog(
+  static successDialog(
       BuildContext context, {
         String title = "Success",
         String description = "An Success occurred",
@@ -41,7 +43,7 @@ class PopDialog {
       _displayDialog(context, title, description, icon, [
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(dialogContext).pop();
             if (onPositiveTap != null) {
               onPositiveTap();
             }
@@ -56,7 +58,7 @@ class PopDialog {
   }
 
   /// Warning Dialog that call alert dialog display function
-  static void warningDialog(
+  static warningDialog(
       BuildContext context, {
         String title = "Warning",
         String description = "An Warning occurred",
@@ -97,7 +99,7 @@ class PopDialog {
   }
 
   /// Warning Dialog that call alert dialog display function
-  static void informationDialog(
+  static informationDialog(
       BuildContext context, {
         String title = "Information",
         String description = "An Information occurred",
@@ -125,13 +127,13 @@ class PopDialog {
   }
 
   /// View Function that Take multiple parameters
-  static void _displayDialog(BuildContext context, String title,
-      String description, Widget icon, List<Widget>? actions) {
+  static void _displayDialog(BuildContext context, String title, String description, Widget icon, List<Widget>? actions) {
     showDialog(
       barrierDismissible: false,
       useSafeArea: true,
       context: context,
       builder: (BuildContext context) {
+        dialogContext = context;
         return AlertDialog(
           title: Align(alignment: Alignment.centerLeft, child: Text(title)),
           content: Text(description),
